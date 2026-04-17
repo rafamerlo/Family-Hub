@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FamíliaApp — Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">🏡</div>
+    <div class="logo-text">Família<span>App</span></div>
+  </div>
+  <div class="sidebar-family">
+    <div class="family-label">Família</div>
+    <div class="family-name" id="sb-family-name">Família Silva</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Principal</div>
+    <a href="dashboard.html" class="nav-item active"><span class="nav-icon">🏠</span> Dashboard</a>
+    <a href="agenda.html"    class="nav-item"><span class="nav-icon">📅</span> Agenda</a>
+    <a href="compras.html"   class="nav-item"><span class="nav-icon">🛒</span> Compras</a>
+    <a href="financas.html"  class="nav-item"><span class="nav-icon">💰</span> Finanças</a>
+    <a href="missoes.html"   class="nav-item"><span class="nav-icon">⭐</span> Missões</a>
+    <div class="nav-section-label">Comunidade</div>
+    <a href="ranking.html"       class="nav-item"><span class="nav-icon">🏆</span> Ranking</a>
+    <a href="notificacoes.html"  class="nav-item" id="nav-notif">
+      <span class="nav-icon">🔔</span> Notificações
+      <span class="nav-badge" id="notif-count">3</span>
+    </a>
+    <div class="nav-section-label">Conta</div>
+    <a href="perfil.html" class="nav-item"><span class="nav-icon">👤</span> Meu Perfil</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sb-avatar">JS</div>
+      <div class="user-info">
+        <div class="user-name" id="sb-user-name">João Silva</div>
+        <div class="user-role" id="sb-user-role">Administrador</div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()" title="Sair">🚪</button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main-wrapper">
+  <header class="topbar">
+    <div class="topbar-title">Dashboard</div>
+    <div class="topbar-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Buscar...">
+    </div>
+    <div class="topbar-actions">
+      <a href="notificacoes.html" class="topbar-btn" title="Notificações">
+        🔔 <span class="badge" id="topbar-notif-badge">3</span>
+      </a>
+      <a href="perfil.html" class="topbar-avatar" id="topbar-avatar">JS</a>
+    </div>
+  </header>
+
+  <main class="page-content">
+
+    <!-- Boas-vindas -->
+    <div class="page-header">
+      <div>
+        <h1>Olá, <span id="welcome-name">João</span>! 👋</h1>
+        <p id="welcome-date">Carregando data...</p>
+      </div>
+      <button class="btn btn-primary" onclick="openModal('modal-evento')">
+        ➕ Novo evento
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon purple">📅</div>
+        <div class="stat-info">
+          <div class="stat-value">4</div>
+          <div class="stat-label">Eventos este mês</div>
+          <div class="stat-change up">↑ 2 novos</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">💰</div>
+        <div class="stat-info">
+          <div class="stat-value">R$ 6.385</div>
+          <div class="stat-label">Saldo do mês</div>
+          <div class="stat-change up">↑ Positivo</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">🛒</div>
+        <div class="stat-info">
+          <div class="stat-value">13</div>
+          <div class="stat-label">Itens nas listas</div>
+          <div class="stat-change down">↓ 3 pendentes</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon pink">⭐</div>
+        <div class="stat-info">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Missões ativas</div>
+          <div class="stat-change up">↑ 1 concluída</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1 -->
+    <div class="grid-2-1 mb-24">
+
+      <!-- Próximos eventos -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">📅 Próximos Eventos</div>
+            <div class="card-subtitle">Agenda da família</div>
+          </div>
+          <a href="agenda.html" class="btn btn-secondary btn-sm">Ver todos</a>
+        </div>
+
+        <div id="events-list">
+          <div class="event-item" style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+            <div style="width:48px;text-align:center;flex-shrink:0">
+              <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase">ABR</div>
+              <div style="font-size:1.4rem;font-weight:800;color:var(--primary);line-height:1">20</div>
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:600;font-size:.92rem">Reunião Familiar</div>
+              <div style="font-size:.8rem;color:var(--text-muted);margin-top:2px">🕖 19:00 · Sala de estar</div>
+            </div>
+            <span class="badge badge-primary">Reunião</span>
+          </div>
+          <div class="event-item" style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+            <div style="width:48px;text-align:center;flex-shrink:0">
+              <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase">ABR</div>
+              <div style="font-size:1.4rem;font-weight:800;color:var(--accent);line-height:1">22</div>
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:600;font-size:.92rem">Consulta médica Pedro</div>
+              <div style="font-size:.8rem;color:var(--text-muted);margin-top:2px">🕙 10:00 · Clínica São Lucas</div>
+            </div>
+            <span class="badge badge-success">Saúde</span>
+          </div>
+          <div class="event-item" style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+            <div style="width:48px;text-align:center;flex-shrink:0">
+              <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase">ABR</div>
+              <div style="font-size:1.4rem;font-weight:800;color:var(--warning);line-height:1">26</div>
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:600;font-size:.92rem">Churrasco de domingo</div>
+              <div style="font-size:.8rem;color:var(--text-muted);margin-top:2px">🕛 12:00 · Quintal</div>
+            </div>
+            <span class="badge badge-warning">Evento</span>
+          </div>
+          <div class="event-item" style="display:flex;gap:14px;padding:12px 0">
+            <div style="width:48px;text-align:center;flex-shrink:0">
+              <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase">MAI</div>
+              <div style="font-size:1.4rem;font-weight:800;color:var(--secondary);line-height:1">15</div>
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:600;font-size:.92rem">Aniversário da Maria 🎂</div>
+              <div style="font-size:.8rem;color:var(--text-muted);margin-top:2px">🕕 18:00 · Casa</div>
+            </div>
+            <span class="badge badge-pink">Aniversário</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini calendário -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📆 Calendário</div>
+        </div>
+        <div id="mini-cal"></div>
+        <div class="divider"></div>
+        <div style="font-size:.8rem;color:var(--text-muted);text-align:center">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--secondary);margin-right:4px"></span>
+          Dias com eventos
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="grid-2 mb-24">
+
+      <!-- Resumo financeiro -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">💰 Resumo Financeiro</div>
+            <div class="card-subtitle">Abril 2026</div>
+          </div>
+          <a href="financas.html" class="btn btn-secondary btn-sm">Detalhes</a>
+        </div>
+
+        <div style="display:flex;gap:16px;margin-bottom:20px">
+          <div style="flex:1;background:#EDFAF4;border-radius:10px;padding:14px;text-align:center">
+            <div style="font-size:.75rem;color:var(--success);font-weight:600;text-transform:uppercase">Receitas</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--success);margin-top:4px">R$ 10.500</div>
+          </div>
+          <div style="flex:1;background:#FFF0F0;border-radius:10px;padding:14px;text-align:center">
+            <div style="font-size:.75rem;color:var(--danger);font-weight:600;text-transform:uppercase">Despesas</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--danger);margin-top:4px">R$ 4.115</div>
+          </div>
+          <div style="flex:1;background:var(--primary-light);border-radius:10px;padding:14px;text-align:center">
+            <div style="font-size:.75rem;color:var(--primary);font-weight:600;text-transform:uppercase">Saldo</div>
+            <div style="font-size:1.3rem;font-weight:800;color:var(--primary);margin-top:4px">R$ 6.385</div>
+          </div>
+        </div>
+
+        <div style="height:160px;position:relative">
+          <canvas id="chart-dash-bar" style="width:100%;height:100%"></canvas>
+        </div>
+      </div>
+
+      <!-- Metas financeiras -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🎯 Metas Financeiras</div>
+          <a href="financas.html" class="btn btn-secondary btn-sm">Ver todas</a>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <div style="font-size:.88rem;font-weight:600">✈️ Viagem de férias</div>
+              <div style="font-size:.8rem;color:var(--text-muted)">R$ 3.200 / R$ 8.000</div>
+            </div>
+            <div class="progress"><div class="progress-bar primary" style="width:40%"></div></div>
+            <div style="font-size:.75rem;color:var(--text-muted);margin-top:4px">40% concluído · Prazo: Dez/2026</div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <div style="font-size:.88rem;font-weight:600">🔨 Reforma da cozinha</div>
+              <div style="font-size:.8rem;color:var(--text-muted)">R$ 1.500 / R$ 5.000</div>
+            </div>
+            <div class="progress"><div class="progress-bar warning" style="width:30%"></div></div>
+            <div style="font-size:.75rem;color:var(--text-muted);margin-top:4px">30% concluído · Prazo: Ago/2026</div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <div style="font-size:.88rem;font-weight:600">🛡️ Fundo de emergência</div>
+              <div style="font-size:.8rem;color:var(--text-muted)">R$ 6.500 / R$ 10.000</div>
+            </div>
+            <div class="progress"><div class="progress-bar success" style="width:65%"></div></div>
+            <div style="font-size:.75rem;color:var(--text-muted);margin-top:4px">65% concluído · Sem prazo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="grid-2">
+
+      <!-- Lista de compras rápida -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🛒 Compras da Semana</div>
+            <div class="card-subtitle">3 itens pendentes</div>
+          </div>
+          <a href="compras.html" class="btn btn-secondary btn-sm">Ver lista</a>
+        </div>
+
+        <label class="check-item">
+          <input type="checkbox"> <div class="check-box"></div>
+          <span class="check-label">Arroz (2 kg)</span>
+          <span class="badge badge-muted">Grãos</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <div class="check-box"></div>
+          <span class="check-label">Feijão (1 kg)</span>
+          <span class="badge badge-muted">Grãos</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" checked> <div class="check-box"></div>
+          <span class="check-label">Leite (6 L)</span>
+          <span class="badge badge-success">Comprado</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <div class="check-box"></div>
+          <span class="check-label">Frango (2 kg)</span>
+          <span class="badge badge-muted">Carnes</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" checked> <div class="check-box"></div>
+          <span class="check-label">Pão de forma</span>
+          <span class="badge badge-success">Comprado</span>
+        </label>
+      </div>
+
+      <!-- Missões em destaque -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">⭐ Missões em Destaque</div>
+            <div class="card-subtitle">Ganhe pontos para o ranking!</div>
+          </div>
+          <a href="missoes.html" class="btn btn-secondary btn-sm">Ver todas</a>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="mission-card">
+            <div class="mission-icon" style="background:#FFF6EC;color:var(--warning)">🏠</div>
+            <div class="mission-body">
+              <div class="mission-title">Organizar a garagem</div>
+              <div class="mission-desc">Limpar e organizar todos os itens</div>
+              <div class="mission-footer">
+                <span class="mission-pts">+30 pts</span>
+                <span class="badge badge-warning">Médio</span>
+              </div>
+            </div>
+          </div>
+          <div class="mission-card">
+            <div class="mission-icon" style="background:#EDFAF4;color:var(--accent)">📚</div>
+            <div class="mission-body">
+              <div class="mission-title">Leitura em família</div>
+              <div class="mission-desc">Ler um livro juntos por 30 min/dia</div>
+              <div class="mission-footer">
+                <span class="mission-pts">+20 pts</span>
+                <span class="badge badge-success">Fácil</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal novo evento rápido -->
+<div class="modal-overlay" id="modal-evento">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">📅 Novo Evento</div>
+      <button class="modal-close" onclick="closeModal('modal-evento')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Título</label>
+      <input type="text" class="form-control" placeholder="Nome do evento">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Data</label>
+        <input type="date" class="form-control">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Horário</label>
+        <input type="time" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Local</label>
+      <input type="text" class="form-control" placeholder="Onde será?">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tipo</label>
+      <select class="form-control">
+        <option>Evento</option>
+        <option>Aniversário</option>
+        <option>Compromisso</option>
+        <option>Reunião</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-evento')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveEvent()">Salvar evento</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Data de boas-vindas
+    const now = new Date();
+    const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+    document.getElementById('welcome-date').textContent =
+      now.toLocaleDateString('pt-BR', opts).replace(/^\w/, c => c.toUpperCase());
+
+    // Nome
+    const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    const firstName = (user.nome || 'Visitante').split(' ')[0];
+    document.getElementById('welcome-name').textContent = firstName;
+
+    // Mini calendário
+    new MiniCalendar('mini-cal', [
+      { date: '2026-04-20' }, { date: '2026-04-22' },
+      { date: '2026-04-26' }, { date: '2026-05-15' }
+    ]);
+
+    // Gráfico de barras
+    setTimeout(() => {
+      drawBarChart('chart-dash-bar',
+        ['Jan','Fev','Mar','Abr'],
+        [8200, 9100, 7800, 10500],
+        ['#6C63FF']
+      );
+    }, 100);
+  });
+
+  function saveEvent() {
+    showToast('Evento salvo com sucesso!', 'success');
+    closeModal('modal-evento');
+  }
+</script>
+</body>
+</html>

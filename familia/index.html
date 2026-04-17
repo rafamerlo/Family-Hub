@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FamíliaApp — Login</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN PAGE ─────────────────────────────────────────── -->
+<div class="login-page">
+
+  <!-- LEFT PANEL -->
+  <div class="login-left">
+    <div class="login-left-content">
+      <span class="big-icon">🏡</span>
+      <h1>FamíliaApp</h1>
+      <p>Organize sua família de forma simples, divertida e colaborativa. Agenda, finanças, compras e muito mais em um só lugar.</p>
+
+      <div class="login-features">
+        <div class="login-feature-item">
+          <div class="feat-icon">📅</div>
+          <span>Agenda compartilhada para toda a família</span>
+        </div>
+        <div class="login-feature-item">
+          <div class="feat-icon">💰</div>
+          <span>Controle financeiro em tempo real</span>
+        </div>
+        <div class="login-feature-item">
+          <div class="feat-icon">🛒</div>
+          <span>Lista de compras colaborativa</span>
+        </div>
+        <div class="login-feature-item">
+          <div class="feat-icon">🏆</div>
+          <span>Ranking e missões para engajar todos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="login-right">
+    <div class="login-box">
+
+      <div class="login-logo">
+        <div class="logo-icon">🏡</div>
+        <div class="logo-text">Família<span style="color:var(--primary)">App</span></div>
+      </div>
+
+      <!-- TABS -->
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchTab('login')">Entrar</button>
+        <button class="login-tab" onclick="switchTab('register')">Criar conta</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="form-login">
+        <h2>Bem-vindo de volta!</h2>
+        <p class="login-sub">Acesse sua conta familiar</p>
+
+        <form id="loginForm" onsubmit="doLogin(event)">
+          <div class="form-group">
+            <label class="form-label">E-mail</label>
+            <div class="input-icon-wrap">
+              <span class="input-icon">✉️</span>
+              <input type="email" class="form-control" id="login-email"
+                     placeholder="seu@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Senha</label>
+            <div class="input-icon-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" class="form-control" id="login-senha"
+                     placeholder="••••••••" required>
+            </div>
+          </div>
+
+          <div class="login-remember">
+            <label>
+              <input type="checkbox" id="remember"> Lembrar de mim
+            </label>
+            <a href="#">Esqueci a senha</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full btn-lg" id="loginBtn">
+            <span>Entrar</span>
+          </button>
+        </form>
+
+        <div class="login-divider">ou acesse com demo</div>
+
+        <button class="btn btn-outline w-full" onclick="fillDemo()">
+          👤 Usar conta de demonstração
+        </button>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="form-register" style="display:none">
+        <h2>Criar conta</h2>
+        <p class="login-sub">Junte-se à sua família no app</p>
+
+        <form id="registerForm" onsubmit="doRegister(event)">
+          <div class="form-group">
+            <label class="form-label">Nome completo</label>
+            <div class="input-icon-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" class="form-control" id="reg-nome"
+                     placeholder="Seu nome" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">E-mail</label>
+            <div class="input-icon-wrap">
+              <span class="input-icon">✉️</span>
+              <input type="email" class="form-control" id="reg-email"
+                     placeholder="seu@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Senha</label>
+              <input type="password" class="form-control" id="reg-senha"
+                     placeholder="Mínimo 6 caracteres" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirmar senha</label>
+              <input type="password" class="form-control" id="reg-confirma"
+                     placeholder="Repita a senha" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Família</label>
+            <div style="display:flex;gap:8px;margin-bottom:10px">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-criar-fam"
+                      onclick="setFamiliaAcao('criar')" style="flex:1">
+                ➕ Criar família
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-entrar-fam"
+                      onclick="setFamiliaAcao('entrar')" style="flex:1">
+                🔑 Entrar com código
+              </button>
+            </div>
+            <input type="hidden" id="familia-acao" value="criar">
+
+            <div id="campo-criar-fam">
+              <input type="text" class="form-control" id="reg-familia-nome"
+                     placeholder="Nome da sua família (ex: Família Silva)">
+            </div>
+            <div id="campo-entrar-fam" style="display:none">
+              <input type="text" class="form-control" id="reg-familia-codigo"
+                     placeholder="Código da família (ex: SILVA2024)">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full btn-lg">
+            Criar conta
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container" class="toast-container"></div>
+
+<script src="assets/js/app.js"></script>
+<script>
+  // ── Tab switch ────────────────────────────────────────────
+  function switchTab(tab) {
+    document.querySelectorAll('.login-tab').forEach((t, i) => {
+      t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
+    });
+    document.getElementById('form-login').style.display    = tab === 'login'    ? '' : 'none';
+    document.getElementById('form-register').style.display = tab === 'register' ? '' : 'none';
+  }
+
+  // ── Família ação ──────────────────────────────────────────
+  function setFamiliaAcao(acao) {
+    document.getElementById('familia-acao').value = acao;
+    document.getElementById('campo-criar-fam').style.display  = acao === 'criar'  ? '' : 'none';
+    document.getElementById('campo-entrar-fam').style.display = acao === 'entrar' ? '' : 'none';
+    document.getElementById('btn-criar-fam').className  = 'btn btn-sm ' + (acao === 'criar'  ? 'btn-primary' : 'btn-outline');
+    document.getElementById('btn-entrar-fam').className = 'btn btn-sm ' + (acao === 'entrar' ? 'btn-primary' : 'btn-outline');
+  }
+
+  // ── Demo ──────────────────────────────────────────────────
+  function fillDemo() {
+    document.getElementById('login-email').value = 'joao@familia.com';
+    document.getElementById('login-senha').value = 'password';
+    showToast('Credenciais demo preenchidas!', 'info');
+  }
+
+  // ── Login ─────────────────────────────────────────────────
+  async function doLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span>Entrando...</span>';
+
+    const email = document.getElementById('login-email').value;
+    const senha = document.getElementById('login-senha').value;
+
+    try {
+      const fd = new FormData();
+      fd.append('action', 'login');
+      fd.append('email', email);
+      fd.append('senha', senha);
+
+      const res  = await fetch('api/auth.php', { method: 'POST', body: fd });
+      const data = await res.json();
+
+      if (data.success) {
+        // Salvar dados na sessionStorage para uso nas páginas HTML estáticas
+        sessionStorage.setItem('user', JSON.stringify(data.user || {
+          id: 1, nome: 'João Silva', email: email,
+          papel: 'admin', pontos: 320,
+          familia_nome: 'Família Silva'
+        }));
+        showToast('Login realizado! Redirecionando...', 'success');
+        setTimeout(() => { window.location.href = 'pages/dashboard.html'; }, 800);
+      } else {
+        showToast(data.message || 'Erro ao fazer login.', 'danger');
+        btn.disabled = false;
+        btn.innerHTML = '<span>Entrar</span>';
+      }
+    } catch (err) {
+      // Modo demo (sem backend PHP)
+      if (email && senha) {
+        const demoUser = {
+          id: 1, nome: 'João Silva', email: email,
+          papel: 'admin', pontos: 320,
+          familia_nome: 'Família Silva', familia_id: 1
+        };
+        sessionStorage.setItem('user', JSON.stringify(demoUser));
+        showToast('Modo demo ativado! Redirecionando...', 'success');
+        setTimeout(() => { window.location.href = 'pages/dashboard.html'; }, 800);
+      } else {
+        showToast('Preencha os campos.', 'warning');
+        btn.disabled = false;
+        btn.innerHTML = '<span>Entrar</span>';
+      }
+    }
+  }
+
+  // ── Register ──────────────────────────────────────────────
+  async function doRegister(e) {
+    e.preventDefault();
+    const nome    = document.getElementById('reg-nome').value;
+    const email   = document.getElementById('reg-email').value;
+    const senha   = document.getElementById('reg-senha').value;
+    const confirma= document.getElementById('reg-confirma').value;
+    const acao    = document.getElementById('familia-acao').value;
+    const famNome = document.getElementById('reg-familia-nome').value;
+    const famCod  = document.getElementById('reg-familia-codigo').value;
+
+    if (senha !== confirma) { showToast('As senhas não coincidem.', 'warning'); return; }
+    if (senha.length < 6)   { showToast('Senha muito curta (mín. 6 caracteres).', 'warning'); return; }
+
+    try {
+      const fd = new FormData();
+      fd.append('action', 'register');
+      fd.append('nome', nome);
+      fd.append('email', email);
+      fd.append('senha', senha);
+      fd.append('confirma', confirma);
+      fd.append('familia_acao', acao);
+      fd.append('familia_nome', famNome);
+      fd.append('familia_codigo', famCod);
+
+      const res  = await fetch('api/auth.php', { method: 'POST', body: fd });
+      const data = await res.json();
+
+      if (data.success) {
+        showToast('Conta criada com sucesso! Faça login.', 'success');
+        setTimeout(() => switchTab('login'), 1200);
+      } else {
+        showToast(data.message || 'Erro ao criar conta.', 'danger');
+      }
+    } catch (err) {
+      showToast('Conta criada (modo demo)! Faça login.', 'success');
+      setTimeout(() => switchTab('login'), 1200);
+    }
+  }
+</script>
+</body>
+</html>
